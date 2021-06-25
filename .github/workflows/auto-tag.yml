@@ -13,8 +13,9 @@ jobs:
       - run: wget -c https://github.com/peaceshi/translation-maker/releases/latest/download/list.md5
       - run: echo "status=$(if (md5sum --status -c list.md5); then echo 1; else echo 0; fi)" >> $GITHUB_ENV
       - run: echo $status
-      - uses: phish108/autotag-action@1.1.37
-        if: ${{ env.status == 1}}
+      - name: use tag
+        if: ${{ env.status == 1}} # should be 0. 1 only for test.
+        uses: phish108/autotag-action@1.1.37
         env:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          branch: master
+          branch: main
