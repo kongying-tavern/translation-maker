@@ -3,6 +3,8 @@ on:
   push:
   schedule:
   - cron: '0 20 * * *'
+env:
+  status: 1
 jobs:
   auto-tag:
     runs-on: ubuntu-latest
