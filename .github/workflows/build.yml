@@ -3,6 +3,7 @@ on:
   push:
     tags:
     - '*'
+  create
 jobs:
   build:
     runs-on: ubuntu-latest
