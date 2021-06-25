@@ -1,0 +1,5 @@
+node_modules
+output
+translations.zip
+*.md5
+Excel/*

@@ -1,0 +1,20 @@
+name: auto-tag
+on:
+  push:
+  schedule:
+  - cron: '0 20 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: yarn install && yarn run gen
+      - run: wget -c https://github.com/peaceshi/translation-maker/releases/latest/download/list.md5
+      - run: echo "status=$(if (md5sum --status -c list.md5); then echo OK; else echo Failed; fi)" >> $GITHUB_ENV
+      - run: echo $status
+      - uses: phish108/autotag-action@1.1.37
+        if: $status == "OK"
+        env:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          branch: master
