@@ -1,0 +1,48 @@
+version: 'translation.{build}'
+
+skip_tags: true
+
+# Build worker image (VM template)
+image: Ubuntu
+
+# scripts that are called at very beginning, before repo cloning
+init:
+    - node -v
+    - git config --global core.autocrlf input
+
+# clone directory
+clone_folder: /home/appveyor/projects/translation-maker/
+
+# fetch repository as zip archive
+shallow_clone: true                 # default is "false"
+
+# set clone depth
+clone_depth: 1                      # clone entire repository history if not defined
+
+stack: node 14
+
+# https://www.appveyor.com/docs/getting-started-with-appveyor-for-linux/#premature-termination-of-the-build-process
+# exit 0 in Bash immediately terminates the build with “green” status; without running on_success and on_finish commands.
+# exit <non-zero> in Bash immediately terminates the build with “red” status without running on_failure and on_finish commands.
+# appveyor exit in Bash “gracefully” terminates build with “green” status by running on_success and on_finish commands.
+# false command in Bash “gracefully” terminates the build with “red” status by running on_failure and on_finish commands.
+install:
+    - ls ${APPVEYOR_BUILD_FOLDER}
+    - cd ${APPVEYOR_BUILD_FOLDER}
+    - wget -c https://github.com/peaceshi/translation-maker/releases/latest/download/list.md5
+    - yarn install && yarn run gen
+    - echo "(if (md5sum --status -c list.md5); then exit 0; else echo newFile; fi)"
+    - md5sum "./Excel/Excel.xlsx" > list.md5
+    - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/translations.zip
+    - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/list.md5
+build: off
+
+deploy:
+    - provider: GitHub
+      description: 'auto build translation with md5' 
+      auth_token:
+        secure: d0YiYq36VrCUet5Y/zYZ+41XUKSSOVOcGtwIW6EXQD+NkDNeErIA3EG5s7oGlLJM
+      draft: false
+      tag: translation-${APPVEYOR_BUILD_ID}
+      on:  
+        APPVEYOR_REPO_TAG: false
