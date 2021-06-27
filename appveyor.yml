@@ -52,6 +52,7 @@ notifications:
   - provider: Email
     to:
       - peaceshi@outlook.com
+      - aymb00@126.com
     subject: 'i18n translations build {{status}}'                  # optional
     message: "Translations files need to be updated."    # optional
     on_build_success: true
