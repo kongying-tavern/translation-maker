@@ -31,7 +31,8 @@ install:
     - cd ${APPVEYOR_BUILD_FOLDER}
     - wget -c https://github.com/peaceshi/translation-maker/releases/latest/download/list.md5
     - yarn install && yarn run gen
-    - if (md5sum --status -c list.md5); then exit 0; else echo newFile; fi
+    # use exit 1 to make sure email notifications only on_success.
+    - if (md5sum --status -c list.md5); then exit 1; else echo newFile; fi
     - md5sum "./Excel/Excel.xlsx" > list.md5
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/translations.zip
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/list.md5
@@ -54,3 +55,5 @@ notifications:
     subject: 'i18n translations build {{status}}'                  # optional
     message: "Translations files need to be updated."    # optional
     on_build_success: true
+    on_build_failure: false
+    on_build_status_changed: false
