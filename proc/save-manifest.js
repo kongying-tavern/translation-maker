@@ -10,7 +10,6 @@ module.exports = (base = process.cwd(), translations = {}, target = '', conf = {
     let translationMap = _.keyBy(conf.KeyMapper, 'langCode');
 
     for(let langCode in translations) {
-        let translation         = translations[langCode] || {};
         let config              = translationMap[langCode] || {};
         let translationFilePath = Path.resolve(base, target, `./${langCode}.json`);
         let content             = FsExtra.readFileSync(translationFilePath, 'utf-8');
