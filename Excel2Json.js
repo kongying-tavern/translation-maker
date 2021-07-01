@@ -4,6 +4,7 @@ const ProcRmdir            = require('./proc/rmdir');
 const ProcDownloadExcel    = require('./proc/download-excel');
 const ProcRenderExcel      = require('./proc/render-excel');
 const ProcSaveTranslations = require('./proc/save-translations');
+const ProcSaveManifest     = require('./proc/save-manifest');
 const ProcPackTranslations = require('./proc/pack-translations');
 
 (async function() {
@@ -17,6 +18,7 @@ const ProcPackTranslations = require('./proc/pack-translations');
     // 保存语言文件
     ProcRmdir(__dirname, './output');
     ProcSaveTranslations(__dirname, translations, './output/translations', ConfMapper);
+    ProcSaveManifest(__dirname, translations, './output/translations', ConfMapper);
 
     // 打包成压缩文件
     ProcPackTranslations(__dirname, './output/translations', './output/translations.zip');
