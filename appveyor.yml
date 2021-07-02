@@ -38,23 +38,27 @@ install:
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/list.md5
 build: off
 
-deploy:
-    - provider: GitHub
-      description: 'auto build translation with md5' 
-      auth_token:
-        secure: d0YiYq36VrCUet5Y/zYZ+41XUKSSOVOcGtwIW6EXQD+NkDNeErIA3EG5s7oGlLJM
-      draft: false
-      tag: translation-${APPVEYOR_BUILD_ID}
-      on:  
-        APPVEYOR_REPO_TAG: false
+-
+  branches:
+    only:
+      - main
+  deploy:
+      - provider: GitHub
+        description: 'auto build translation with md5' 
+        auth_token:
+          secure: d0YiYq36VrCUet5Y/zYZ+41XUKSSOVOcGtwIW6EXQD+NkDNeErIA3EG5s7oGlLJM
+        draft: false
+        tag: translation-${APPVEYOR_BUILD_ID}
+        on:  
+          APPVEYOR_REPO_TAG: false
 
-notifications:
-  - provider: Email
-    to:
-      - peaceshi@outlook.com
-      - aymb00@126.com
-    subject: 'i18n translations build {{status}}'                  # optional
-    message: "Translations files need to be updated."    # optional
-    on_build_success: true
-    on_build_failure: false
-    on_build_status_changed: false
+  notifications:
+    - provider: Email
+      to:
+        - peaceshi@outlook.com
+        - aymb00@126.com
+      subject: 'i18n translations build {{status}}'                  # optional
+      message: "Translations files need to be updated."    # optional
+      on_build_success: true
+      on_build_failure: false
+      on_build_status_changed: false
