@@ -1,5 +1,6 @@
 node_modules
 output
+resource
 translations.zip
 *.md5
 Excel/*

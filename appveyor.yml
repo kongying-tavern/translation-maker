@@ -33,8 +33,8 @@ install:
     - yarn install && yarn run gen
     # use exit 1 to make sure email notifications only on_success.
     - if (md5sum --status -c list.md5); then exit 1; else echo newFile; fi
-    - md5sum "./Excel/Excel.xlsx" > list.md5
-    - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/translations.zip
+    - md5sum "./resource/excel.xlsx" > list.md5
+    - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/translations.zip
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/list.md5
 build: off
 
