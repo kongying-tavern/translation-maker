@@ -21,6 +21,9 @@ clone_depth: 1                      # clone entire repository history if not def
 
 stack: node 14
 
+environment:
+  refresh_token:
+    secure: hSIWQHE0jBxYTcoitrlR/Fv9Sff4X8DAw6SASshdLgyujYtuv89wZtppyG8n/FKK
 # https://www.appveyor.com/docs/getting-started-with-appveyor-for-linux/#premature-termination-of-the-build-process
 # exit 0 in Bash immediately terminates the build with “green” status; without running on_success and on_finish commands.
 # exit <non-zero> in Bash immediately terminates the build with “red” status without running on_failure and on_finish commands.
@@ -29,13 +32,14 @@ stack: node 14
 install:
     - ls ${APPVEYOR_BUILD_FOLDER}
     - cd ${APPVEYOR_BUILD_FOLDER}
-    - wget -c https://github.com/peaceshi/translation-maker/releases/latest/download/list.md5
+    # - appveyor DownloadFile https://media.cooluc.com/source/aliyunDrive-cli/aliyundrive-cli_linux_amd64 -FileName pan
     - yarn install && yarn run gen
-    # use exit 1 to make sure email notifications only on_success.
-    - if (md5sum --status -c list.md5); then exit 1; else echo newFile; fi
-    - md5sum "./resource/excel.xlsx" > list.md5
+    # - filesize=$(wc -c ${APPVEYOR_BUILD_FOLDER}/output/translations.zip | awk '{print $1}')
+    # - filesha1=$(sha1sum ${APPVEYOR_BUILD_FOLDER}/output/translations.zip | awk '{print $1}')
+    # - ./pan -t ${refresh_token} upload -f "aliyunpan://translations.zip|${filesha1}|${filesize}|release"
+    - md5sum "excel.xlsx" > ${APPVEYOR_BUILD_FOLDER}/output/list.md5
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/translations.zip
-    - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/list.md5
+    - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/list.md5
 build: off
 
 for:
@@ -43,6 +47,11 @@ for:
   branches:
     only:
       - main
+  before_deploy:
+    - cd ${APPVEYOR_BUILD_FOLDER}/resource/
+    - wget -c https://github.com/peaceshi/translation-maker/releases/latest/download/list.md5
+    # use exit 1 to make sure email notifications only on_success.
+    - if (md5sum --status -c list.md5); then exit 1; else echo newFile; fi
   deploy:
       - provider: GitHub
         description: 'auto build translation with md5' 
@@ -58,8 +67,8 @@ for:
       to:
         - peaceshi@outlook.com
         - aymb00@126.com
-      subject: 'i18n translations build {{status}}'                  # optional
-      message: "Translations files need to be updated."    # optional
+      subject: 'i18n translations build {{status}}'
+      message: "Translations files need to be updated."
       on_build_success: true
       on_build_failure: false
       on_build_status_changed: false
