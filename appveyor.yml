@@ -38,6 +38,7 @@ install:
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/list.md5
 build: off
 
+for:
 -
   branches:
     only:
