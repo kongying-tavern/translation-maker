@@ -4,17 +4,19 @@ const FsExtra = require('fs-extra');
 
 module.exports = (base = process.cwd(), translationConfig = {}, target = '', conf = {KeyMapper: {}}) => {
     if(!target)
-        throw new Error('[SAVE-TRANS] Target is empty');
+        throw new Error('[SAVE-SUBGROUPS] Target is empty');
 
     let translations = translationConfig.translations || {};
     let subgroups    = translationConfig.subgroups || {};
 
     for(let langCode in translations) {
-        let translation = translations[langCode] || {};
+        let translation          = translations[langCode] || {};
+        let mapperConf           = _.find(conf.KeyMapper, {langCode}) || {};
+        let translationConverted = mapperConf.useKey ? _.mapValues(translation, (v, i) => i) : translation;
 
         for(let subgroupName in subgroups) {
             let subgroupKeys              = subgroups[subgroupName] || [];
-            let subgroupTranslation       = _.pick(translation, subgroupKeys);
+            let subgroupTranslation       = _.pick(translationConverted, subgroupKeys);
             let subgroupTranslationSorted = _.sortBy(subgroupTranslation, v => subgroupKeys.indexOf(v));
 
             let translationOutput   = subgroupTranslationSorted.join(',');
