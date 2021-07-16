@@ -10,6 +10,7 @@ module.exports = (base = process.cwd(), path = '', tabName = '', conf = {SkipRow
         throw new Error('[RENDER-EXCEL] Tab name is empty');
 
     let translations = {};
+    let subgroups    = {};
     let filePath     = Path.resolve(base, path);
     let sheet        = UtilExcel.getSheet(filePath, tabName);
     let range        = UtilExcel.getRangeIndexes(sheet['!ref']);
@@ -19,14 +20,24 @@ module.exports = (base = process.cwd(), path = '', tabName = '', conf = {SkipRow
         if(rowIndex - range.s.r < conf.SkipRows)
             continue;
 
-        let rowName       = UtilExcel.getRowName(rowIndex);
-        let transCellName = `${conf.KeyCol}${rowName}`;
-        let transCell     = sheet[transCellName] || {};
-        let transKey      = UtilFormat.transText(transCell.v || '');
+        let rowName          = UtilExcel.getRowName(rowIndex);
+        let transCellName    = `${conf.KeyCol}${rowName}`;
+        let transCell        = sheet[transCellName] || {};
+        let transKey         = UtilFormat.transText(transCell.v || '');
+        let subgroupCellName = `${conf.SubGroupCol}${rowName}`;
+        let subgroupCell     = sheet[subgroupCellName] || {};
+        let subgroupName     = UtilFormat.trimStartDot(subgroupCell.v || '');
 
         if(!transKey)
             continue;
 
+        // 查找【分类标记】对应的类
+        if(subgroupName) {
+            subgroups[subgroupName] = subgroups[subgroupName] || [];
+            subgroups[subgroupName].push(transKey);
+        }
+
+        // 遍历所有语言，获取翻译
         for(let colIndex = range.s.c; colIndex <= range.e.c; colIndex++) {
             let colName = UtilExcel.getColName(colIndex);
 
@@ -44,5 +55,5 @@ module.exports = (base = process.cwd(), path = '', tabName = '', conf = {SkipRow
         }
     }
 
-    return translations;
+    return {translations, subgroups};
 };
