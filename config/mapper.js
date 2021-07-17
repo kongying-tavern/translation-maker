@@ -1,24 +1,22 @@
 const SkipRows = 1;
 
-const SubGroupCol = 'C';
-
 const KeyCol = 'B';
 
 const KeyMapper = {
-    E: {
+    D: {
         langName: '中文（简体）',
         langCode: 'zh-CN',
         useKey: true
     },
-    F: {
+    E: {
         langName: 'English',
         langCode: 'en-US'
     },
-    G: {
+    F: {
         langName: '日本語',
         langCode: 'ja-JP'
     },
-    H: {
+    G: {
         langName: 'Esperanto',
         langCode: 'eo'
     }
@@ -26,7 +24,6 @@ const KeyMapper = {
 
 module.exports = {
     SkipRows,
-    SubGroupCol,
     KeyCol,
     KeyMapper
 };
