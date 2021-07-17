@@ -41,6 +41,7 @@ install:
     - md5sum "excel.xlsx" > ${APPVEYOR_BUILD_FOLDER}/output/list.md5
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/translations.zip
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/list.md5
+    - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/subgroups.zip
 build: off
 
 for:
