@@ -96,6 +96,8 @@ process(){
     BASE_URL="https://github.com/peaceshi/translation-maker/releases/latest/download/translations.zip"
     TMP_DIR=`mktemp -d /tmp/translations.XXXXXX`
     TMP_ZIP="$TMP_DIR/translations.zip"
+    BAK_DIR="$OUT_DIR/LANGUAGE-bak"
+    LNG_DIR="$OUT_DIR/LANGUAGE"
     # Fetch translations
     printf 'Fetching translations... '
     if [ $USE_WGET = 0 ]; then
@@ -108,8 +110,11 @@ process(){
         clean_and_exit 2
     fi
 
-    7za x $TMP_ZIP -y -o$OUT_DIR
+    rm -rf $BAK_DIR
+    mv $LNG_DIR $BAK_DIR
 
+    7za x $TMP_ZIP -y -o$OUT_DIR
+    mv $OUT_DIR/translations $LNG_DIR
     _green 'Done\n\n'
 
     # Clean up
