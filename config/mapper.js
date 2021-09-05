@@ -18,6 +18,10 @@ const KeyMapper = {
         langName: '日本語',
         langCode: 'ja-JP'
     },
+    I: {
+        langName: 'Français',
+        langCode: 'fr-FR'
+    },
     H: {
         langName: 'Esperanto',
         langCode: 'eo'
