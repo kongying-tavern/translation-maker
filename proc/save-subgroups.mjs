@@ -1,8 +1,8 @@
-const _       = require('lodash');
-const Path    = require('path');
-const FsExtra = require('fs-extra');
+import _ from 'lodash';
+import Path from 'path';
+import FsExtra from 'fs-extra';
 
-module.exports = (base = process.cwd(), translationConfig = {}, target = '', conf = {KeyMapper: {}}) => {
+export default (base = process.cwd(), translationConfig = {}, target = '', conf = {KeyMapper: {}}) => {
     if(!target)
         throw new Error('[SAVE-SUBGROUPS] Target is empty');
 
@@ -24,4 +24,4 @@ module.exports = (base = process.cwd(), translationConfig = {}, target = '', con
             FsExtra.outputFileSync(translationFilePath, translationOutput, 'utf-8');
         }
     }
-};
+}

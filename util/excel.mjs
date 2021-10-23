@@ -1,5 +1,5 @@
-const _    = require('lodash');
-const XLSX = require('xlsx');
+import _ from 'lodash';
+import XLSX from 'xlsx';
 
 function getExcel(file = '') {
     return XLSX.readFile(file);
@@ -35,7 +35,7 @@ function getRangeIndexes(range = '') {
     return XLSX.utils.decode_range(range);
 }
 
-module.exports = {
+export default {
     getExcel,
     getSheet,
     getRowName,
@@ -44,4 +44,4 @@ module.exports = {
     getColIndex,
     getRangeNames,
     getRangeIndexes
-};
+}

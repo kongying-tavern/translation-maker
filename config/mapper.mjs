@@ -28,7 +28,7 @@ const KeyMapper = {
     }
 };
 
-module.exports = {
+export default {
     SkipRows,
     SubGroupCol,
     KeyCol,
