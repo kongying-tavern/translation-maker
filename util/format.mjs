@@ -6,7 +6,7 @@ function trimStartDot(str = '') {
     return str.replace(/^\./g, '');
 }
 
-module.exports = {
+export default {
     transText,
     trimStartDot
-};
+}

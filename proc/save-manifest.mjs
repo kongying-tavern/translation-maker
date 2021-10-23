@@ -1,9 +1,9 @@
-const _       = require('lodash');
-const Path    = require('path');
-const FsExtra = require('fs-extra');
-const MD5     = require('md5');
+import _ from 'lodash';
+import Path from 'path';
+import FsExtra from 'fs-extra';
+import MD5 from 'md5';
 
-module.exports = (base = process.cwd(), translations = {}, target = '', conf = {KeyMapper: {}}) => {
+export default (base = process.cwd(), translations = {}, target = '', conf = {KeyMapper: {}}) => {
     if(!target)
         throw new Error('[SAVE-MANIFEST] Target is empty');
 
@@ -32,4 +32,4 @@ module.exports = (base = process.cwd(), translations = {}, target = '', conf = {
     let translationManifestPath = Path.resolve(base, target, './manifest.json');
     let translationMapVals      = _.values(translationMap);
     FsExtra.outputJsonSync(translationManifestPath, translationMapVals, 'utf-8');
-};
+}

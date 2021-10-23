@@ -3,9 +3,10 @@
   "private": true,
   "version": "1.0.0",
   "description": "",
-  "main": "Excel2Json.js",
+  "type": "module",
+  "main": "Excel2Json.mjs",
   "scripts": {
-    "gen": "node Excel2Json.js"
+    "gen": "node Excel2Json.mjs"
   },
   "author": "",
   "license": "MIT",

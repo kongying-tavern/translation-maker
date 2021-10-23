@@ -1,7 +1,7 @@
-const Path     = require('path');
-const CrossZip = require('cross-zip');
+import Path from 'path';
+import CrossZip from 'cross-zip';
 
-module.exports = (base = process.cwd(), inPath = '', outPath = '') => {
+export default (base = process.cwd(), inPath = '', outPath = '') => {
     if(!inPath)
         throw new Error('[PACK-TRANS] Input path is empty');
     if(!outPath)
@@ -10,4 +10,4 @@ module.exports = (base = process.cwd(), inPath = '', outPath = '') => {
     let zipIn  = Path.resolve(base, inPath);
     let zipOut = Path.resolve(base, outPath);
     CrossZip.zipSync(zipIn, zipOut);
-};
+}

@@ -1,9 +1,9 @@
-const _       = require('lodash');
-const Path    = require('path');
-const Axios   = require('axios');
-const FsExtra = require('fs-extra');
+import _ from 'lodash';
+import Path from 'path';
+import Axios from 'axios';
+import FsExtra from 'fs-extra';
 
-module.exports = async (base = process.cwd(), docKey = '', target = '') => {
+export default async (base = process.cwd(), docKey = '', target = '') => {
     if(!docKey)
         throw new Error('[DOWN-EXCEL] DocKey is empty');
     if(!target)
@@ -34,4 +34,4 @@ module.exports = async (base = process.cwd(), docKey = '', target = '') => {
     .catch(e => {
         throw new Error(`[DOWN-EXCEL] ${err.toString()}`);
     });
-};
+}

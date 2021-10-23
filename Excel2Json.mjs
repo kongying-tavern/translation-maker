@@ -1,12 +1,15 @@
-const ConfDownload         = require('./config/download');
-const ConfMapper           = require('./config/mapper');
-const ProcRmdir            = require('./proc/rmdir');
-const ProcDownloadExcel    = require('./proc/download-excel');
-const ProcRenderExcel      = require('./proc/render-excel');
-const ProcSaveTranslations = require('./proc/save-translations');
-const ProcSaveSubgroups    = require('./proc/save-subgroups');
-const ProcSaveManifest     = require('./proc/save-manifest');
-const ProcPackTranslations = require('./proc/pack-translations');
+import ConfDownload from './config/download.mjs';
+import ConfMapper from './config/mapper.mjs';
+import UtilFile from './util/file.mjs';
+import ProcRmdir from './proc/rmdir.mjs';
+import ProcDownloadExcel from './proc/download-excel.mjs';
+import ProcRenderExcel from './proc/render-excel.mjs';
+import ProcSaveTranslations from './proc/save-translations.mjs';
+import ProcSaveSubgroups from './proc/save-subgroups.mjs';
+import ProcSaveManifest from './proc/save-manifest.mjs';
+import ProcPackTranslations from './proc/pack-translations.mjs';
+
+global.__dirname = UtilFile.getCurrentDirName(import.meta.url);
 
 (async function() {
     // 下载Excel

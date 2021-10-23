@@ -1,9 +1,9 @@
-const _          = require('lodash');
-const Path       = require('path');
-const UtilExcel  = require('../util/excel');
-const UtilFormat = require('../util/format');
+import _ from 'lodash';
+import Path from 'path';
+import UtilExcel from '../util/excel.mjs';
+import UtilFormat from '../util/format.mjs';
 
-module.exports = (base = process.cwd(), path = '', tabName = '', conf = {SkipRows: 0, KeyMapper: {}}) => {
+export default (base = process.cwd(), path = '', tabName = '', conf = {SkipRows: 0, KeyMapper: {}}) => {
     if(!path)
         throw new Error('[RENDER-EXCEL] Path is empty');
     if(!tabName)
@@ -56,4 +56,4 @@ module.exports = (base = process.cwd(), path = '', tabName = '', conf = {SkipRow
     }
 
     return {translations, subgroups};
-};
+}

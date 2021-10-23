@@ -1,8 +1,8 @@
-const _       = require('lodash');
-const Path    = require('path');
-const FsExtra = require('fs-extra');
+import _ from 'lodash';
+import Path from 'path';
+import FsExtra from 'fs-extra';
 
-module.exports = (base = process.cwd(), translations = {}, target = '', conf = {KeyMapper: {}}) => {
+export default (base = process.cwd(), translations = {}, target = '', conf = {KeyMapper: {}}) => {
     if(!target)
         throw new Error('[SAVE-TRANS] Target is empty');
 
@@ -11,4 +11,4 @@ module.exports = (base = process.cwd(), translations = {}, target = '', conf = {
         let translationFilePath = Path.resolve(base, target, `./${langCode}.json`);
         FsExtra.outputJsonSync(translationFilePath, translation, 'utf-8');
     }
-};
+}
