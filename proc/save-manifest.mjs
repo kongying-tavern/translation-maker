@@ -24,9 +24,9 @@ export default (base = process.cwd(), translations = {}, target = '', conf = {Ke
         let totalCount      = _.keys(json).length;
         let translatedCount = !!config.useKey ? totalCount : _.values(json).filter(v => v).length;
         let ratioTranslated = totalCount === 0 ? 0 : +(translatedCount / totalCount * 100).toFixed(8);
-        _.set(translationMap, [langCode, 'totalCount'], totalCount);
-        _.set(translationMap, [langCode, 'translatedCount'], translatedCount);
-        _.set(translationMap, [langCode, 'ratioTranslated'], ratioTranslated);
+        _.set(translationMap, [langCode, 'summary', 'countTotal'], totalCount);
+        _.set(translationMap, [langCode, 'summary', 'countTranslated'], translatedCount);
+        _.set(translationMap, [langCode, 'summary', 'ratioTranslated'], ratioTranslated);
     }
 
     let translationManifestPath = Path.resolve(base, target, './manifest.json');
