@@ -49,9 +49,10 @@ export default (base = process.cwd(), path = '', tabName = '', conf = {SkipRows:
             let cellName = `${colName}${rowName}`;
             let cell     = sheet[cellName] || {};
             let cellVal  = UtilFormat.transText(cell.v || '');
+            let cellText = cellVal || (mapperConf.useKey ? transKey : '');
             let langCode = mapperConf.langCode || '';
 
-            _.set(translations, [langCode, transKey], cellVal);
+            _.set(translations, [langCode, transKey], cellText);
         }
     }
 
