@@ -1,27 +1,26 @@
-import _ from 'lodash';
-import Path from 'path';
-import FsExtra from 'fs-extra';
+import _ from 'lodash'
+import Path from 'path'
+import FsExtra from 'fs-extra'
 
-export default (base = process.cwd(), translationConfig = {}, target = '', conf = {KeyMapper: {}}) => {
-    if(!target)
-        throw new Error('[SAVE-SUBGROUPS] Target is empty');
+export default (base = process.cwd(), translationConfig = {}, target = '', conf = { KeyMapper: {} }) => {
+  if (!target) { throw new Error('[SAVE-SUBGROUPS] Target is empty') }
 
-    let translations = translationConfig.translations || {};
-    let subgroups    = translationConfig.subgroups || {};
+  const translations = translationConfig.translations || {}
+  const subgroups = translationConfig.subgroups || {}
 
-    for(let langCode in translations) {
-        let translation          = translations[langCode] || {};
-        let mapperConf           = _.find(conf.KeyMapper, {langCode}) || {};
-        let translationConverted = mapperConf.useKey ? _.mapValues(translation, (v, i) => i) : translation;
+  for (const langCode in translations) {
+    const translation = translations[langCode] || {}
+    const mapperConf = _.find(conf.KeyMapper, { langCode }) || {}
+    const translationConverted = mapperConf.useKey ? _.mapValues(translation, (v, i) => i) : translation
 
-        for(let subgroupName in subgroups) {
-            let subgroupKeys              = subgroups[subgroupName] || [];
-            let subgroupTranslation       = _.pick(translationConverted, subgroupKeys);
-            let subgroupTranslationSorted = _.sortBy(subgroupTranslation, v => subgroupKeys.indexOf(v));
+    for (const subgroupName in subgroups) {
+      const subgroupKeys = subgroups[subgroupName] || []
+      const subgroupTranslation = _.pick(translationConverted, subgroupKeys)
+      const subgroupTranslationSorted = _.sortBy(subgroupTranslation, v => subgroupKeys.indexOf(v))
 
-            let translationOutput   = subgroupTranslationSorted.join(',');
-            let translationFilePath = Path.resolve(base, target, `./${langCode}.${subgroupName}.txt`);
-            FsExtra.outputFileSync(translationFilePath, translationOutput, 'utf-8');
-        }
+      const translationOutput = subgroupTranslationSorted.join(',')
+      const translationFilePath = Path.resolve(base, target, `./${langCode}.${subgroupName}.txt`)
+      FsExtra.outputFileSync(translationFilePath, translationOutput, 'utf-8')
     }
+  }
 }

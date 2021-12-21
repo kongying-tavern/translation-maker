@@ -1,5 +1,5 @@
-const DocKey = 'seDy6YlNvuO8';
+const DocKey = 'seDy6YlNvuO8'
 
 export default {
-    DocKey
-};
+  DocKey
+}
