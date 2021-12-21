@@ -6,7 +6,8 @@
   "type": "module",
   "main": "Excel2Json.mjs",
   "scripts": {
-    "gen": "node Excel2Json.mjs"
+    "gen": "node Excel2Json.mjs",
+    "lint": "eslint --ext .js,.cjs,.mjs ."
   },
   "author": "",
   "license": "MIT",
@@ -18,5 +19,12 @@
     "md5": "^2.3.0",
     "rimraf": "^3.0.2",
     "xlsx": "^0.17.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "eslint-config-standard": "latest",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1 || ^5.0.0"
   }
 }
