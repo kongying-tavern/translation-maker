@@ -32,6 +32,6 @@ export default async (base = process.cwd(), docKey = '', target = '') => {
             });
     })
     .catch(e => {
-        throw new Error(`[DOWN-EXCEL] ${err.toString()}`);
+        throw new Error(`[DOWN-EXCEL] ${e.toString()}`);
     });
 }
