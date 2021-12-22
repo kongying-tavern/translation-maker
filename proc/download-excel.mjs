@@ -8,7 +8,7 @@ export default async (base = process.cwd(), docKey = '', target = '') => {
   if (!target) { throw new Error('[DOWN-EXCEL] Target is empty') }
 
   const downloadMeta = await Axios.get(`https://drive.kdocs.cn/api/v3/links/${docKey}/download?isblocks=false`).then(res => res.data).catch(() => ({}))
-  const downloadUrl = _.get(downloadMeta, 'fileinfo.static_url', '')
+  const downloadUrl = _.get(downloadMeta, 'fileinfo.url', '')
   const excelPath = Path.resolve(base, target)
 
   return await Promise
