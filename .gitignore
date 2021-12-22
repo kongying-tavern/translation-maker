@@ -1,4 +1,7 @@
 node_modules
+yarn.lock
+package-lock.json
+
 output
 resource
 translations.zip
