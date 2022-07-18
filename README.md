@@ -25,3 +25,4 @@
 1. 运行 `npm run gen`，此命令会生成各语言的语言包和整体配置 `manifest.json`，并打包成 `.zip` 文件
 
 Excel2json is written by [@boxsnake](https://github.com/boxsnake "boxsnake")
+
