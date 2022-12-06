@@ -2,8 +2,8 @@
 
 [![appveyor-image]][appveyor-url] [![GitHub-image]][github-url] [![license-image]][license-url]
 
-[appveyor-image]: https://img.shields.io/appveyor/ci/peaceshi/translation-maker.svg?style=flat&logo=appveyor&logoColor=FFFFFF&label=master
-[appveyor-url]: https://ci.appveyor.com/project/peaceshi/translation-maker
+[appveyor-image]: https://img.shields.io/appveyor/ci/kongying-tavern/translation-maker.svg?style=flat&logo=appveyor&logoColor=FFFFFF&label=main
+[appveyor-url]: https://ci.appveyor.com/project/kongying-tavern/translation-maker
 
 [github-image]: https://img.shields.io/github/v/release/peaceshi/translation-maker?style=flat
 [github-url]: https://github.com/peaceshi/translation-maker/releases/latest
