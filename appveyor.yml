@@ -19,7 +19,7 @@ shallow_clone: true                 # default is "false"
 # set clone depth
 clone_depth: 1                      # clone entire repository history if not defined
 
-stack: node 18
+stack: node 16
 
 environment:
   refresh_token:
@@ -56,12 +56,12 @@ build: off
 #     - if (md5sum --status -c list.md5); then exit 1; else echo newFile; fi
 #   deploy:
 #       - provider: GitHub
-#         description: 'auto build translation with md5' 
+#         description: 'auto build translation with md5'
 #         auth_token:
 #           secure: d0YiYq36VrCUet5Y/zYZ+41XUKSSOVOcGtwIW6EXQD+NkDNeErIA3EG5s7oGlLJM
 #         draft: false
 #         tag: translation-${APPVEYOR_BUILD_ID}
-#         on:  
+#         on:
 #           APPVEYOR_REPO_TAG: false
 
 #   notifications:
