@@ -37,40 +37,40 @@ install:
     # - filesize=$(wc -c ${APPVEYOR_BUILD_FOLDER}/output/translations.zip | awk '{print $1}')
     # - filesha1=$(sha1sum ${APPVEYOR_BUILD_FOLDER}/output/translations.zip | awk '{print $1}')
     # - ./pan -t ${refresh_token} upload -f "aliyunpan://translations.zip|${filesha1}|${filesize}|release"
-    - cd ${APPVEYOR_BUILD_FOLDER}/resource/
-    - md5sum "excel.xlsx" > ${APPVEYOR_BUILD_FOLDER}/output/list.md5
+#     - cd ${APPVEYOR_BUILD_FOLDER}/resource/
+#     - md5sum "excel.xlsx" > ${APPVEYOR_BUILD_FOLDER}/output/list.md5
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/translations.zip
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/list.md5
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/subgroups.zip
 build: off
 
-for:
--
-  branches:
-    only:
-      - main
-  before_deploy:
-    - cd ${APPVEYOR_BUILD_FOLDER}/resource/
-    - wget -c https://github.com/peaceshi/translation-maker/releases/latest/download/list.md5
-    # use exit 1 to make sure email notifications only on_success.
-    - if (md5sum --status -c list.md5); then exit 1; else echo newFile; fi
-  deploy:
-      - provider: GitHub
-        description: 'auto build translation with md5' 
-        auth_token:
-          secure: d0YiYq36VrCUet5Y/zYZ+41XUKSSOVOcGtwIW6EXQD+NkDNeErIA3EG5s7oGlLJM
-        draft: false
-        tag: translation-${APPVEYOR_BUILD_ID}
-        on:  
-          APPVEYOR_REPO_TAG: false
+# for:
+# -
+#   branches:
+#     only:
+#       - main
+#   before_deploy:
+#     - cd ${APPVEYOR_BUILD_FOLDER}/resource/
+#     - wget -c https://github.com/peaceshi/translation-maker/releases/latest/download/list.md5
+#     # use exit 1 to make sure email notifications only on_success.
+#     - if (md5sum --status -c list.md5); then exit 1; else echo newFile; fi
+#   deploy:
+#       - provider: GitHub
+#         description: 'auto build translation with md5' 
+#         auth_token:
+#           secure: d0YiYq36VrCUet5Y/zYZ+41XUKSSOVOcGtwIW6EXQD+NkDNeErIA3EG5s7oGlLJM
+#         draft: false
+#         tag: translation-${APPVEYOR_BUILD_ID}
+#         on:  
+#           APPVEYOR_REPO_TAG: false
 
-  notifications:
-    - provider: Email
-      to:
-        - peaceshi@outlook.com
-        - aymb00@126.com
-      subject: 'i18n translations build {{status}}'
-      message: "Translations files need to be updated."
-      on_build_success: true
-      on_build_failure: false
-      on_build_status_changed: false
+#   notifications:
+#     - provider: Email
+#       to:
+#         - peaceshi@outlook.com
+#         - aymb00@126.com
+#       subject: 'i18n translations build {{status}}'
+#       message: "Translations files need to be updated."
+#       on_build_success: true
+#       on_build_failure: false
+#       on_build_status_changed: false
