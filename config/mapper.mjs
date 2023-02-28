@@ -25,6 +25,10 @@ const KeyMapper = {
   H: {
     langName: 'Esperanto',
     langCode: 'eo'
+  },
+  J: {
+    langName: '粵語',
+    langCode: 'yue-CN'
   }
 }
 

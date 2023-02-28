@@ -21,10 +21,11 @@
     "xlsx": "^0.17.0"
   },
   "devDependencies": {
-    "eslint": "^7.12.1",
+    "eslint": "^8.35.0",
     "eslint-config-standard": "latest",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1 || ^5.0.0"
+    "eslint-plugin-promise": "^6.1.1"
   }
 }
