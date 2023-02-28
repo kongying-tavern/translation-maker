@@ -21,7 +21,7 @@ export default (base = process.cwd(), translations = {}, target = '', conf = { K
 
     // 生成覆盖率
     const totalCount = _.keys(json).length
-    const translatedCount = config.useKey ? totalCount : _.values(json).filter(v => v).length
+    const translatedCount = _.values(json).filter(v => v).length
     const ratioTranslated = totalCount === 0 ? 0 : +(translatedCount / totalCount * 100).toFixed(8)
     _.set(translationMap, [langCode, 'summary', 'countTotal'], totalCount)
     _.set(translationMap, [langCode, 'summary', 'countTranslated'], translatedCount)

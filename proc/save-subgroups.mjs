@@ -10,8 +10,7 @@ export default (base = process.cwd(), translationConfig = {}, target = '', conf 
 
   for (const langCode in translations) {
     const translation = translations[langCode] || {}
-    const mapperConf = _.find(conf.KeyMapper, { langCode }) || {}
-    const translationConverted = mapperConf.useKey ? _.mapValues(translation, (v, i) => i) : translation
+    const translationConverted = translation
 
     for (const subgroupName in subgroups) {
       const subgroupKeys = subgroups[subgroupName] || []

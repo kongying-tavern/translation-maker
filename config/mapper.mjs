@@ -7,8 +7,7 @@ const KeyCol = 'B'
 const KeyMapper = {
   E: {
     langName: '中文（简体）',
-    langCode: 'zh-CN',
-    useKey: true
+    langCode: 'zh-CN'
   },
   F: {
     langName: 'English',
