@@ -44,7 +44,7 @@ export default (base = process.cwd(), path = '', tabName = '', conf = { SkipRows
       const cellName = `${colName}${rowName}`
       const cell = sheet[cellName] || {}
       const cellVal = UtilFormat.transText(cell.v || '')
-      const cellText = cellVal || transKey
+      const cellText = cellVal || ''
       const langCode = mapperConf.langCode || ''
 
       _.set(translations, [langCode, transKey], cellText)
