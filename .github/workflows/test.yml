@@ -23,7 +23,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run gen
       
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: translations
           path: output/translations/
