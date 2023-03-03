@@ -3,7 +3,7 @@ version: 'translation.{build}'
 skip_tags: true
 
 # Build worker image (VM template)
-image: Ubuntu
+image: Ubuntu2004
 
 # scripts that are called at very beginning, before repo cloning
 init:
@@ -19,7 +19,7 @@ shallow_clone: true                 # default is "false"
 # set clone depth
 clone_depth: 1                      # clone entire repository history if not defined
 
-stack: node 18
+# stack: node 18
 
 environment:
   refresh_token:
@@ -33,6 +33,7 @@ install:
     - ls ${APPVEYOR_BUILD_FOLDER}
     - cd ${APPVEYOR_BUILD_FOLDER}
     # - appveyor DownloadFile https://media.cooluc.com/source/aliyunDrive-cli/aliyundrive-cli_linux_amd64 -FileName pan
+    - nvm use 18
     - pnpm install && pnpm run gen
     # - filesize=$(wc -c ${APPVEYOR_BUILD_FOLDER}/output/translations.zip | awk '{print $1}')
     # - filesha1=$(sha1sum ${APPVEYOR_BUILD_FOLDER}/output/translations.zip | awk '{print $1}')
