@@ -12,18 +12,18 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "cross-zip": "^4.0.0",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^10.1.0",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "rimraf": "^3.0.2",
-    "xlsx": "^0.17.0"
+    "xlsx": "^0.17.5"
   },
   "devDependencies": {
     "eslint": "^8.35.0",
     "eslint-config-standard": "latest",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1"
