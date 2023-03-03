@@ -34,7 +34,8 @@ install:
     - cd ${APPVEYOR_BUILD_FOLDER}
     # - appveyor DownloadFile https://media.cooluc.com/source/aliyunDrive-cli/aliyundrive-cli_linux_amd64 -FileName pan
     - nvm use 18
-    - pnpm install && pnpm run gen
+    - npm i -g pnpm
+    - pnpm install --frozen-lockfile && pnpm run gen
     # - filesize=$(wc -c ${APPVEYOR_BUILD_FOLDER}/output/translations.zip | awk '{print $1}')
     # - filesha1=$(sha1sum ${APPVEYOR_BUILD_FOLDER}/output/translations.zip | awk '{print $1}')
     # - ./pan -t ${refresh_token} upload -f "aliyunpan://translations.zip|${filesha1}|${filesize}|release"
