@@ -3,7 +3,7 @@ version: 'translation.{build}'
 skip_tags: true
 
 # Build worker image (VM template)
-image: Ubuntu
+image: Ubuntu2004
 
 # scripts that are called at very beginning, before repo cloning
 init:
@@ -19,7 +19,7 @@ shallow_clone: true                 # default is "false"
 # set clone depth
 clone_depth: 1                      # clone entire repository history if not defined
 
-stack: node 16
+# stack: node 18
 
 environment:
   refresh_token:
@@ -33,14 +33,16 @@ install:
     - ls ${APPVEYOR_BUILD_FOLDER}
     - cd ${APPVEYOR_BUILD_FOLDER}
     # - appveyor DownloadFile https://media.cooluc.com/source/aliyunDrive-cli/aliyundrive-cli_linux_amd64 -FileName pan
-    - yarn install && yarn run gen
+    - nvm use 18
+    - npm i -g pnpm
+    - pnpm install --frozen-lockfile && pnpm run gen
     # - filesize=$(wc -c ${APPVEYOR_BUILD_FOLDER}/output/translations.zip | awk '{print $1}')
     # - filesha1=$(sha1sum ${APPVEYOR_BUILD_FOLDER}/output/translations.zip | awk '{print $1}')
     # - ./pan -t ${refresh_token} upload -f "aliyunpan://translations.zip|${filesha1}|${filesize}|release"
 #     - cd ${APPVEYOR_BUILD_FOLDER}/resource/
 #     - md5sum "excel.xlsx" > ${APPVEYOR_BUILD_FOLDER}/output/list.md5
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/translations.zip
-    - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/list.md5
+    # - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/list.md5
     - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/subgroups.zip
 build: off
 

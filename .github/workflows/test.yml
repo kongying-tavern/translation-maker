@@ -10,16 +10,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v2
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: '14'
-          cache: 'yarn'
-      - run: yarn install && yarn run gen
+            version: latest
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run gen
       
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: translations
           path: output/translations/
