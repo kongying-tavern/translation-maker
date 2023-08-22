@@ -3,7 +3,7 @@ function transText (str = '') {
 }
 
 function trimStartDot (str = '') {
-  return str.replace(/^\./g, '')
+  return str.toString().replace(/^\./g, '')
 }
 
 export default {
