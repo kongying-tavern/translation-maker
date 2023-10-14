@@ -9,31 +9,35 @@ const KeyMapper = {
     langName: '简体中文',
     langCode: 'zh-CN'
   },
-  K: {
+  F: {
     langName: '繁體中文',
     langCode: 'hant-TW'
   },
-  F: {
+  G: {
     langName: 'English',
     langCode: 'en-US'
   },
-  G: {
+  H: {
     langName: '日本語',
     langCode: 'ja-JP'
   },
-  L: {
+  I: {
     langName: '한국어',
     langCode: 'kr-KR'
   },
-  I: {
+  J: {
     langName: 'Français',
     langCode: 'fr-FR'
   },
-  M: {
+  K: {
+    langName: 'Deutsch',
+    langCode: 'de-DE'
+  },
+  L: {
     langName: 'Русский',
     langCode: 'ru-RU'
   },
-  H: {
+  M: {
     langName: 'Esperanto',
     langCode: 'eo'
   }
