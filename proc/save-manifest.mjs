@@ -9,7 +9,6 @@ export default (base = process.cwd(), translations = {}, target = '', conf = { K
   const translationMap = _.keyBy(conf.KeyMapper, 'langCode')
 
   for (const langCode in translations) {
-    const config = translationMap[langCode] || {}
     const translationFilePath = Path.resolve(base, target, `./${langCode}.json`)
     const content = FsExtra.readFileSync(translationFilePath, 'utf-8')
     const json = FsExtra.readJsonSync(translationFilePath, 'utf-8')
