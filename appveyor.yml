@@ -1,5 +1,9 @@
 version: 'translation.{build}'
 
+branches:
+  only:
+    - main
+
 skip_tags: true
 
 # Build worker image (VM template)
@@ -7,8 +11,8 @@ image: Ubuntu2004
 
 # scripts that are called at very beginning, before repo cloning
 init:
-    - node -v
-    - git config --global core.autocrlf input
+  - node -v
+  - git config --global core.autocrlf input
 
 # clone directory
 clone_folder: /home/appveyor/projects/translation-maker/
@@ -17,62 +21,53 @@ clone_folder: /home/appveyor/projects/translation-maker/
 shallow_clone: true                 # default is "false"
 
 # set clone depth
-clone_depth: 1                      # clone entire repository history if not defined
+clone_depth: 1
 
-# stack: node 18
-
-environment:
-  refresh_token:
-    secure: hSIWQHE0jBxYTcoitrlR/Fv9Sff4X8DAw6SASshdLgyujYtuv89wZtppyG8n/FKK
-# https://www.appveyor.com/docs/getting-started-with-appveyor-for-linux/#premature-termination-of-the-build-process
-# exit 0 in Bash immediately terminates the build with “green” status; without running on_success and on_finish commands.
-# exit <non-zero> in Bash immediately terminates the build with “red” status without running on_failure and on_finish commands.
-# appveyor exit in Bash “gracefully” terminates build with “green” status by running on_success and on_finish commands.
-# false command in Bash “gracefully” terminates the build with “red” status by running on_failure and on_finish commands.
 install:
-    - ls ${APPVEYOR_BUILD_FOLDER}
-    - cd ${APPVEYOR_BUILD_FOLDER}
-    # - appveyor DownloadFile https://media.cooluc.com/source/aliyunDrive-cli/aliyundrive-cli_linux_amd64 -FileName pan
-    - nvm use 18
-    - npm i -g pnpm
-    - pnpm install --frozen-lockfile && pnpm run gen
-    # - filesize=$(wc -c ${APPVEYOR_BUILD_FOLDER}/output/translations.zip | awk '{print $1}')
-    # - filesha1=$(sha1sum ${APPVEYOR_BUILD_FOLDER}/output/translations.zip | awk '{print $1}')
-    # - ./pan -t ${refresh_token} upload -f "aliyunpan://translations.zip|${filesha1}|${filesize}|release"
-#     - cd ${APPVEYOR_BUILD_FOLDER}/resource/
-#     - md5sum "excel.xlsx" > ${APPVEYOR_BUILD_FOLDER}/output/list.md5
-    - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/translations.zip
-    # - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/list.md5
-    - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/subgroups.zip
-build: off
+  - ls ${APPVEYOR_BUILD_FOLDER}
+  - cd ${APPVEYOR_BUILD_FOLDER}
+  - nvm use 18
+  - npm i -g pnpm
+  - pnpm install --frozen-lockfile && pnpm run gen
+  - cd ${APPVEYOR_BUILD_FOLDER}/resource
+  - md5sum "excel.xlsx" > ${APPVEYOR_BUILD_FOLDER}/output/list.md5
+  - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/translations.zip
+  - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/subgroups.zip
+  - appveyor PushArtifact ${APPVEYOR_BUILD_FOLDER}/output/list.md5
+build: false
 
-# for:
-# -
-#   branches:
-#     only:
-#       - main
-#   before_deploy:
-#     - cd ${APPVEYOR_BUILD_FOLDER}/resource/
-#     - wget -c https://github.com/peaceshi/translation-maker/releases/latest/download/list.md5
-#     # use exit 1 to make sure email notifications only on_success.
-#     - if (md5sum --status -c list.md5); then exit 1; else echo newFile; fi
-#   deploy:
-#       - provider: GitHub
-#         description: 'auto build translation with md5'
-#         auth_token:
-#           secure: d0YiYq36VrCUet5Y/zYZ+41XUKSSOVOcGtwIW6EXQD+NkDNeErIA3EG5s7oGlLJM
-#         draft: false
-#         tag: translation-${APPVEYOR_BUILD_ID}
-#         on:
-#           APPVEYOR_REPO_TAG: false
+before_deploy:
+  - cd ${APPVEYOR_BUILD_FOLDER}/resource/
+  - wget -c https://github.com/kongying-tavern/translation-maker/releases/latest/download/list.md5
+  # use exit 1 to make sure email notifications only on_success.
+  - if (md5sum --status -c list.md5); then exit 1; else echo newFile; fi
+deploy:
+  - provider: GitHub
+    description: 'auto build translation with md5'
+    auth_token:
+      secure: qVIe1mUQFH0xGmWgTAhwYp5fI/4iueAgxGOI9VkszlSaJ5Jd7LclfKEC688Rk1b1
+    draft: false
+    tag: translation-${APPVEYOR_BUILD_ID}
+    on:
+      APPVEYOR_REPO_TAG: false
+  - provider: FTP
+    protocol: sftp
+    host:
+      secure: bIO7k3lus79a9p0FIaKg7g==
+    username:
+      secure: DJzHnaYnZXJo1xjVB5N1Rg==
+    password:
+      secure: UOKhBppthS6fdDd8aVWSkg==
+    folder: /www/YuanShen/HotUpdate/Language
+    artifact: /translations\.zip/
 
-#   notifications:
-#     - provider: Email
-#       to:
-#         - peaceshi@outlook.com
-#         - aymb00@126.com
-#       subject: 'i18n translations build {{status}}'
-#       message: "Translations files need to be updated."
-#       on_build_success: true
-#       on_build_failure: false
-#       on_build_status_changed: false
+notifications:
+  - provider: Email
+    to:
+      - deeno@qq.com
+      - aymb00@126.com
+    subject: 'i18n translations build {{status}}'
+    message: "Translations files need to be updated."
+    on_build_success: true
+    on_build_failure: false
+    on_build_status_changed: false
