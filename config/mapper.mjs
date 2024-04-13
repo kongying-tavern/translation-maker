@@ -1,3 +1,5 @@
+const Tabs = ['TR_Main', 'TR_Map', 'TR_Item', 'TR_Res']
+
 const SkipRows = 1
 
 const SubGroupCol = 'C'
@@ -44,6 +46,7 @@ const KeyMapper = {
 }
 
 export default {
+  Tabs,
   SkipRows,
   SubGroupCol,
   KeyCol,

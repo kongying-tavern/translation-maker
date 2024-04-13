@@ -18,9 +18,8 @@ global.__dirname = UtilFile.getCurrentDirName(import.meta.url);
   await ProcDownloadExcel(__dirname, ConfDownload.DocKey, './resource/excel.xlsx')
 
   // 解析Excel
-  const tlTabs = ['TR_Main', 'TR_Map', 'TR_Item']
   const tlConfs = []
-  for (const tlTab of tlTabs) {
+  for (const tlTab of ConfMapper.Tabs) {
     const tlConf = ProcRenderExcel(__dirname, './resource/excel.xlsx', tlTab, ConfMapper)
     tlConfs.push(tlConf)
   }
