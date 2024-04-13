@@ -12,8 +12,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "archiver": "^7.0.1",
     "axios": "^0.21.4",
-    "cross-zip": "^4.0.0",
     "fs-extra": "^10.1.0",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",

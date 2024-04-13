@@ -1,5 +1,6 @@
+import Fs from 'fs'
 import Path from 'path'
-import CrossZip from 'cross-zip'
+import Archiver from 'archiver'
 
 export default (base = process.cwd(), inPath = '', outPath = '') => {
   if (!inPath) { throw new Error('[PACK-TRANS] Input path is empty') }
@@ -7,5 +8,10 @@ export default (base = process.cwd(), inPath = '', outPath = '') => {
 
   const zipIn = Path.resolve(base, inPath)
   const zipOut = Path.resolve(base, outPath)
-  CrossZip.zipSync(zipIn, zipOut)
+
+  const output = Fs.createWriteStream(zipOut)
+  const archive = Archiver('zip', { zlib: { level: 9 } })
+  archive.pipe(output)
+  archive.directory(zipIn, false)
+  archive.finalize()
 }
