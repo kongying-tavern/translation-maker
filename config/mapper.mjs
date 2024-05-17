@@ -9,11 +9,11 @@ const KeyCol = 'B'
 const KeyMapper = {
   E: {
     langName: '简体中文',
-    langCode: 'zh-CN'
+    langCode: 'zh-hans'
   },
   F: {
     langName: '繁體中文',
-    langCode: 'hant-TW'
+    langCode: 'zh-hant'
   },
   G: {
     langName: 'English',
@@ -25,7 +25,7 @@ const KeyMapper = {
   },
   I: {
     langName: '한국어',
-    langCode: 'kr-KR'
+    langCode: 'ko-KR'
   },
   J: {
     langName: 'Français',
