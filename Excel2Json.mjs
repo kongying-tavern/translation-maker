@@ -6,7 +6,6 @@ import ProcDownloadExcel from './proc/download-excel.mjs'
 import ProcRenderExcel from './proc/render-excel.mjs'
 import ProcReduceTranslations from './proc/reduce-translations.mjs'
 import ProcSaveTranslations from './proc/save-translations.mjs'
-import ProcSaveSubgroups from './proc/save-subgroups.mjs'
 import ProcSaveManifest from './proc/save-manifest.mjs'
 import ProcPackTranslations from './proc/pack-translations.mjs'
 
@@ -28,7 +27,6 @@ global.__dirname = UtilFile.getCurrentDirName(import.meta.url);
   // 保存语言文件
   ProcRmdir(__dirname, './output')
   ProcSaveTranslations(__dirname, tlConfig.translations, './output/translations', ConfMapper)
-  ProcSaveSubgroups(__dirname, tlConfig, './output/subgroups', ConfMapper)
   ProcSaveManifest(__dirname, tlConfig.translations, './output/translations', ConfMapper)
 
   // 打包成压缩文件
