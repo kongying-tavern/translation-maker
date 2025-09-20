@@ -7,39 +7,39 @@ const SubGroupCol = 'C'
 const KeyCol = 'B'
 
 const KeyMapper = {
-  E: {
+  F: {
     langName: '简体中文',
     langCode: 'zh-Hans'
   },
-  F: {
+  G: {
     langName: '繁體中文',
     langCode: 'zh-Hant'
   },
-  G: {
+  H: {
     langName: 'English',
     langCode: 'en-US'
   },
-  H: {
+  I: {
     langName: '日本語',
     langCode: 'ja-JP'
   },
-  I: {
+  J: {
     langName: '한국어',
     langCode: 'ko-KR'
   },
-  J: {
+  K: {
     langName: 'Français',
     langCode: 'fr-FR'
   },
-  K: {
+  L: {
     langName: 'Deutsch',
     langCode: 'de-DE'
   },
-  L: {
+  M: {
     langName: 'Русский',
     langCode: 'ru-RU'
   },
-  M: {
+  N: {
     langName: 'Esperanto',
     langCode: 'eo'
   }
