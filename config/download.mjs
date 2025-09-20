@@ -1,4 +1,4 @@
-const DocKey = 'seDy6YlNvuO8'
+const DocKey = 'cv47wrxKiz7b'
 
 export default {
   DocKey
