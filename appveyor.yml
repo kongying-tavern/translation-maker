@@ -58,7 +58,7 @@ deploy:
       secure: DJzHnaYnZXJo1xjVB5N1Rg==
     password:
       secure: UOKhBppthS6fdDd8aVWSkg==
-    folder: /www/YuanShen/HotUpdate/Language
+    folder: ../www/YuanShen/HotUpdate/Language
     application: /translations\.zip/
 
 notifications:
