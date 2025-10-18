@@ -14,7 +14,7 @@ global.__dirname = UtilFile.getCurrentDirName(import.meta.url);
 (async function () {
   // 下载Excel
   ProcRmdir(__dirname, './resource')
-  await ProcDownloadExcel(__dirname, ConfDownload.DocKey, './resource/excel.xlsx')
+  await ProcDownloadExcel(__dirname, ConfDownload.DocBase, ConfDownload.DocPath, './resource/excel.xlsx')
 
   // 解析Excel
   const tlConfs = []

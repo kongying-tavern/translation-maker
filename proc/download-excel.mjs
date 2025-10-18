@@ -1,14 +1,14 @@
-import _ from 'lodash'
-import Path from 'path'
+import Path from 'node:path'
+import URL from 'node:url'
 import Axios from 'axios'
 import FsExtra from 'fs-extra'
 
-export default async (base = process.cwd(), docKey = '', target = '') => {
-  if (!docKey) { throw new Error('[DOWN-EXCEL] DocKey is empty') }
+export default async (base = process.cwd(), docBase = '', docPath = '', target = '') => {
+  if (!docBase) { throw new Error('[DOWN-EXCEL] DocBase is empty') }
+  if (!docPath) { throw new Error('[DOWN-EXCEL] DocPath is empty') }
   if (!target) { throw new Error('[DOWN-EXCEL] Target is empty') }
 
-  const downloadMeta = await Axios.get(`https://drive.kdocs.cn/api/v3/links/${docKey}/download?isblocks=false`).then(res => res.data).catch(() => ({}))
-  const downloadUrl = _.get(downloadMeta, 'fileinfo.url', '')
+  const downloadUrl = URL.resolve(docBase, docPath)
   const excelPath = Path.resolve(base, target)
 
   return await Promise
