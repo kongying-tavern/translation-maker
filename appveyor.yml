@@ -53,12 +53,12 @@ deploy:
   - provider: FTP
     protocol: sftp
     host:
-      secure: bIO7k3lus79a9p0FIaKg7g==
+      secure: 092M8mabIV0LrL79t53Ndw==
     username:
       secure: DJzHnaYnZXJo1xjVB5N1Rg==
     password:
       secure: UOKhBppthS6fdDd8aVWSkg==
-    folder: ../www/YuanShen/HotUpdate/Language
+    folder: /www/YuanShen/HotUpdate/Language
     application: /translations\.zip/
 
 notifications:
